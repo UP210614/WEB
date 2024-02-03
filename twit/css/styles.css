@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #15202B;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.contenedor-twit{
+    transition: 0.8s;
+    padding: 50px;
+    border-radius: 25px;
+    width: 800px;
+    margin: 5% auto;
+    color: white;
+}
+
+.contenedor-twit:hover{
+    background-color: #25394c;
+}
+
+.cuerpo-twit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.datos-perfil{
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.imagen-avatar{
+    height: 38px;
+    border-radius: 100%;
+}
+
+.imagen-twit{
+    border-radius: 25px;
+    height: 200px;
+}
+
+@media (min-width: 768px){
+    .imagen-twit{
+
+        height: 350px;
+    }
+}
