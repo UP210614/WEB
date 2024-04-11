@@ -3,13 +3,14 @@ const userSelect = document.getElementById('select-users');
 const userContainer = document.getElementById('user-container');
 const taskContainer = document.getElementById('task-container');
 const tasksButton = document.querySelector("#boton-tareas");
-
+let usuarios;
 let pressed = false;
 
 
+document.addEventListener("DOMContentLoaded", showUsersSelect);
 
-showUsersSelect();
 
+getAllUsers().then(users => console.log(users));
 
 userSelect.addEventListener('change', (e) => {
   pressed = false;
@@ -28,10 +29,11 @@ tasksButton.addEventListener("click", () => {
   pressed = !pressed;
   if (pressed) {
     tasksButton.innerHTML = "Esconder Tareas";
+    console.log(userSelect.value);
     getTaskById(userSelect.value).then(tasks => {
       tasks.forEach(element => {
         const text = element.title;
-        const completed = element.completed ? 'checked' : '';
+        const completed = element.completed == '1' ? 'checked' : '';
         taskContainer.children[2].innerHTML += `<li><span>${text}</span> <input type=\"checkbox\" ${completed}></li>`;
       });
     })
@@ -43,12 +45,12 @@ tasksButton.addEventListener("click", () => {
 
 
 function getAllTasks() {
-  return fetch('/data/tareas.json')
+  return fetch('http://localhost/UniversidadPHP/tasks.php')
     .then(resp => resp.json());
 }
 
 function getAllUsers() {
-  return fetch('/data/usuarios.json')
+  return fetch('http://localhost/UniversidadPHP/')
     .then(resp => resp.json())
 }
 
@@ -81,10 +83,12 @@ function getTaskById(userID) {
   return getAllTasks().then(tasks => {
     const userTasks = [];
     for (let i = 0; i < tasks.length; i++) {
+      console.log(tasks[i].userId);
       if (tasks[i].userId == userID) {
         userTasks.push(tasks[i]);
       }
     }
+    console.log(tasks);
     return userTasks;
   })
 }
